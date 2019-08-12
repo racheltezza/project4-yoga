@@ -18,6 +18,7 @@ const app = express()
  */
 const { userRouter } = require('./controllers/users.js')
 const { eventsListRouter } = require('./controllers/eventsList.js')
+const { eventsRouter } = require('./controllers/events.js')
 
 /* Step 3
  *
@@ -51,6 +52,7 @@ app.use(express.static(`${__dirname}/client/build`))
  */
 app.use('/api/users', userRouter)
 app.use('/api/users/:userId/eventsLists', eventsListRouter)
+app.use('/api/users/:userId/eventsLists/:listId/events', eventsRouter)
 /* Step 5
  *
  * add catch all route to serve up the built react app for any request not made to our

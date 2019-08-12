@@ -46,7 +46,7 @@ function getAllEvents() {
 }
 
 function getOneEvent(eventId) {
-  return EventCollection.find(eventId)
+  return EventCollection.findById(eventId)
 }
 
 function createEvent(event) {
