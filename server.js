@@ -16,8 +16,8 @@ const app = express()
  * import routers from controllers/
  *
  */
-const { templateRouter } = require('./controllers/template.js')
-
+const { userRouter } = require('./controllers/users.js')
+const { eventsListRouter } = require('./controllers/eventsList.js')
 
 /* Step 3
  *
@@ -49,8 +49,8 @@ app.use(express.static(`${__dirname}/client/build`))
  * add router for the application to use. The first argument is a prefix to all
  * the paths defined in the router.
  */
-app.use('/api/helloworld', templateRouter)
-
+app.use('/api/users', userRouter)
+app.use('/api/users/:userId/eventsLists', eventsListRouter)
 /* Step 5
  *
  * add catch all route to serve up the built react app for any request not made to our
