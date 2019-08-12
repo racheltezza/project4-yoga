@@ -118,6 +118,7 @@ export default class Users extends Component {
                 {/* <h1>{this.state.users}</h1> */}
                 <h1>all users</h1>
                 {usersList}
+                <button onClick={this.handleToggledNewUserForm}>Add User Account</button>
             </div>
         )
     }
