@@ -15,7 +15,7 @@ export default class Users extends Component {
     *
     */
     state = {
-        user: [],
+        users: [],
         newUser: {
             name: "",
             userName: "",
@@ -33,9 +33,13 @@ export default class Users extends Component {
     *   -REMINDER remember `setState` it is an async function
     */
     componentDidMount() {
-        axios.get('/api/helloworld')
+        this.getAllUsers()
+    }
+    
+    getAllUsers = () => {
+        axios.get('/api/users')
             .then((res) => {
-                this.setState({message: res.data})
+                this.setState({users: res.data})
             })
     }
 
@@ -46,10 +50,16 @@ export default class Users extends Component {
     *
     */
     render() {
+        let usersList = this.state.users.map((user) => {
+            return user.name
+
+        })
         return (
             <div>
                 {/* Accessing the value of message from the state object */}
-                <h1>{this.state.message}</h1>
+                {/* <h1>{this.state.users}</h1> */}
+                <h1>all users</h1>
+                {usersList}
             </div>
         )
     }
