@@ -43,6 +43,27 @@ export default class Users extends Component {
             })
     }
 
+    handleInputChange = (event) => {
+        const copiedNewUser = {...this.state.newUser}
+        copiedNewUser[event.target.name] = event.target.value
+        this.setState({newUser: copiedNewUser})
+    }
+
+    handleNewUserSubmit = (event) => {
+        event.preventDefault()
+        axios.post('/api/users', this.state.newUser)
+        .then(() => {
+            this.setState({ isNewUserFormShowing: false })
+            this.getAllUsers()
+        })
+    }
+
+    handleToggledNewUserForm = () => {
+        this.setState((state) => {
+            return {isNewUserFormShowing: true}
+        })
+    }
+
     /* Step 5
     *  The render function manages what is shown in the browser
     *  TODO: delete the jsx returned
@@ -55,6 +76,43 @@ export default class Users extends Component {
 
         })
         return (
+            this.state.isNewUserFormShowing
+            ?
+            <form onSubmit={this.handleNewUserSubmit}>
+                <label htmlFor='new-user-name'>Name: </label>
+                <input 
+                name='name' 
+                id='new-user-name' 
+                type='text' 
+                onChange={this.handleInputChange}
+                />
+                <label htmlFor='new-user-userName'>Username: </label>
+                <input
+                name='userName'
+                id='new-user-userName'
+                type='text'
+                onChange={this.handleInputChange}
+                />
+                <label htmlFor='new-user-password'>Password: </label>
+                <input
+                name='password'
+                id='new-user-password'
+                type='text'
+                onChange={this.handleInputChange}
+                />
+                <label htmlFor='new-user-city'>City: </label>
+                <input
+                name='city'
+                id='new-user-city'
+                type='text'
+                onChange={this.handleInputChange}
+                />
+                <input
+                type='submit'
+                value='Create Account'
+                />
+            </form>
+            :
             <div>
                 {/* Accessing the value of message from the state object */}
                 {/* <h1>{this.state.users}</h1> */}
