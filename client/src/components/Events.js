@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -42,6 +42,13 @@ export default class Events extends Component {
             })
     }
 
+    handleDeleteEventsList = () => {
+        axios.delete(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}`)
+        .then(() => {
+            this.setState({redirectToEventsList: true})
+        })
+    }
+
     /* Step 5
     *  The render function manages what is shown in the browser
     *  TODO: delete the jsx returned
@@ -49,6 +56,9 @@ export default class Events extends Component {
     *
     */
     render() {
+        if(this.state.redirectToEventsList) {
+            return <Redirect to={`/users/${this.props.match.params.userId}/eventsLists`} />
+        }
         let eventsList = this.state.events.map((event) => {
             return <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name}</Link>
         })
@@ -58,6 +68,7 @@ export default class Events extends Component {
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/`}>Back to all Lists</Link>
                 <h1>One List</h1>
                 {eventsList}
+                <button onClick={this.handleDeleteEventsList}>Delete this List</button>
             </div>
         )
     }

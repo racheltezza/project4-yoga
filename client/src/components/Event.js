@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -43,6 +44,7 @@ export default class HelloWorld extends Component {
         return (
             <div>
                 {/* Accessing the value of message from the state object */}
+                <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`}>Back to All events</Link>
                 <h1>{this.state.event.name}</h1>
                 <ul>
                 <li>City: {this.state.event.city}</li>

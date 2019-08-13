@@ -70,12 +70,15 @@ export default class EventsList extends Component {
     */
     render() {
         let eventsListsList = this.state.eventsLists.map((list) => {
-            return <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}/events`}>{list.name}</Link>
+            return <li>
+                    <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}/events`}>{list.name}</Link>
+                </li>
         })
         return (
             this.state.isNewEventsListFormShowing
             ?
             <form onSubmit={this.handleSubmitNewListForm}>
+                <label htmlFor='new-list-name'>List Name: </label>
                 <input onChange={this.handleInputChange} name='name' id='new-list-name'/>
                 <input type='submit' value='Add New List'/>
             </form>
