@@ -50,7 +50,7 @@ export default class Events extends Component {
     */
     render() {
         let eventsList = this.state.events.map((event) => {
-            return <Link to={`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name}</Link>
+            return <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name}</Link>
         })
         return (
             <div>

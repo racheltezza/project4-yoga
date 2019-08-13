@@ -15,7 +15,8 @@ export default class HelloWorld extends Component {
     *
     */
     state = {
-        message: ''
+        event: {},
+        isEditEventFormDisplayed: false
     }
 
     /* Step 4
@@ -26,9 +27,9 @@ export default class HelloWorld extends Component {
     *   -REMINDER remember `setState` it is an async function
     */
     componentDidMount() {
-        axios.get('/api/helloworld')
+        axios.get(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${this.props.match.params.eventId}`)
             .then((res) => {
-                this.setState({message: res.data})
+                this.setState({event: res.data})
             })
     }
 
@@ -42,7 +43,13 @@ export default class HelloWorld extends Component {
         return (
             <div>
                 {/* Accessing the value of message from the state object */}
-                <h1>{this.state.message}</h1>
+                <h1>{this.state.event.name}</h1>
+                <ul>
+                <li>City: {this.state.event.city}</li>
+                <li>Address: {this.state.event.address}</li>
+                <li>Date: {this.state.event.date}</li>
+                <li>Description: {this.state.event.description}</li>
+                </ul>
             </div>
         )
     }
