@@ -31,6 +31,10 @@ export default class EventsList extends Component {
     *   -REMINDER remember `setState` it is an async function
     */
     componentDidMount() {
+        this.getAllEventsLists()
+    }
+    
+    getAllEventsLists = () => {
         axios.get(`/api/users/${this.props.match.params.userId}/eventsLists`)
             .then((res) => {
                 this.setState({eventsLists: res.data})
@@ -40,6 +44,21 @@ export default class EventsList extends Component {
     handleToggleNewListForm = () => {
         this.setState((state) => {
             return {isNewEventsListFormShowing: true}
+        })
+    }
+
+    handleInputChange = (event) => {
+        let copiedNewEventsList = {...this.state.newEventsList}
+        copiedNewEventsList[event.target.name] = event.target.value
+        this.setState({newEventsList: copiedNewEventsList})
+    }
+
+    handleSubmitNewListForm = (event) => {
+        event.preventDefault()
+        axios.post(`/api/users/${this.props.match.params.userId}/eventsLists`, this.state.newEventsList)
+        .then(() => {
+            this.setState({isNewEventsListFormShowing: false})
+            this.getAllEventsLists()
         })
     }
 
@@ -56,8 +75,9 @@ export default class EventsList extends Component {
         return (
             this.state.isNewEventsListFormShowing
             ?
-            <form>
-                <input />
+            <form onSubmit={this.handleSubmitNewListForm}>
+                <input onChange={this.handleInputChange} name='name' id='new-list-name'/>
+                <input type='submit' value='Add New List'/>
             </form>
             :
             <div>
