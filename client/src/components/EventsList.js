@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -18,7 +19,8 @@ export default class EventsList extends Component {
         eventsLists: [],
         newEventsList: {
             name: ""
-        }
+        },
+        isNewEventsListFormShowing: false
     }
 
     /* Step 4
@@ -35,6 +37,12 @@ export default class EventsList extends Component {
             })
     }
 
+    handleToggleNewListForm = () => {
+        this.setState((state) => {
+            return {isNewEventsListFormShowing: true}
+        })
+    }
+
     /* Step 5
     *  The render function manages what is shown in the browser
     *  TODO: delete the jsx returned
@@ -42,10 +50,23 @@ export default class EventsList extends Component {
     *
     */
     render() {
+        let eventsLists = this.state.eventsLists.map((list) => {
+            return <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}`}>{list.name}</Link>
+        })
         return (
+            this.state.isNewEventsListFormShowing
+            ?
+            <form>
+                <input />
+            </form>
+            :
             <div>
                 {/* Acc}essing the value of message from the state object */}
                 <h1>My events lists</h1>
+                <ul>
+                    {eventsLists}
+                </ul>
+                <button onClick={this.handleToggleNewListForm}>Add New Yoga Event List</button>
             </div>
         )
     }
