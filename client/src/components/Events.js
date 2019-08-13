@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -35,7 +36,7 @@ export default class Events extends Component {
     *   -REMINDER remember `setState` it is an async function
     */
     componentDidMount() {
-        axios.get(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}`)
+        axios.get(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`)
             .then((res) => {
                 this.setState({events: res.data})
             })
@@ -48,10 +49,14 @@ export default class Events extends Component {
     *
     */
     render() {
+        let eventsList = this.state.events.map((event) => {
+            return <Link to={`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name}</Link>
+        })
         return (
             <div>
                 {/* Accessing the value of message from the state object */}
                 <h1>One List</h1>
+                {eventsList}
             </div>
         )
     }

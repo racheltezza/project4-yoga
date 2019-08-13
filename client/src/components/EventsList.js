@@ -50,8 +50,8 @@ export default class EventsList extends Component {
     *
     */
     render() {
-        let eventsLists = this.state.eventsLists.map((list) => {
-            return <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}`}>{list.name}</Link>
+        let eventsListsList = this.state.eventsLists.map((list) => {
+            return <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}/events`}>{list.name}</Link>
         })
         return (
             this.state.isNewEventsListFormShowing
@@ -64,7 +64,7 @@ export default class EventsList extends Component {
                 {/* Acc}essing the value of message from the state object */}
                 <h1>My events lists</h1>
                 <ul>
-                    {eventsLists}
+                    {eventsListsList}
                 </ul>
                 <button onClick={this.handleToggleNewListForm}>Add New Yoga Event List</button>
             </div>
