@@ -97,6 +97,7 @@ export default class User extends Component {
                 </ul>
                 <a href="/">Back to all Users</a>
                 <button onClick={this.handleToggleEditForm}>Edit User</button>
+                <button onClick={this.handleDeleteUser}>Delete User</button>
             </div>
         )
     }
