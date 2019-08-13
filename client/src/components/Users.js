@@ -72,7 +72,7 @@ export default class Users extends Component {
     */
     render() {
         let usersList = this.state.users.map((user) => {
-            return <li><a href={`/users/${user._id}`}>{user.name}</a></li>
+            return <li><a href={`/users/${user._id}/eventsLists`}>{user.name}</a></li>
 
         })
         return (

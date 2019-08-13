@@ -55,6 +55,7 @@ export default class Events extends Component {
         return (
             <div>
                 {/* Accessing the value of message from the state object */}
+                <Link to={`/users/${this.props.match.params.userId}/eventsLists/`}>Back to all Lists</Link>
                 <h1>One List</h1>
                 {eventsList}
             </div>

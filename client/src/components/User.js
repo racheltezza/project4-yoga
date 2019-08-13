@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -95,7 +95,7 @@ export default class User extends Component {
                     <li>Password: {this.state.user.password}</li>
                     <li>City: {this.state.user.city}</li>
                 </ul>
-                <a href="/">Back to all Users</a>
+                <a href={`/users/${this.state.user._id}/eventsLists`}>Back to my lists</a>
                 <button onClick={this.handleToggleEditForm}>Edit User</button>
                 <button onClick={this.handleDeleteUser}>Delete User</button>
             </div>
