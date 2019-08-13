@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Users from './components/Users.js'
+import User from './components/User.js'
 import './App.css';
 
 
@@ -10,6 +11,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Users}/>
+          <Route path="/users/:userId" component={User}/>
         </Switch>
       </Router>
     </div>

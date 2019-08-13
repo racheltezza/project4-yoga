@@ -72,7 +72,7 @@ export default class Users extends Component {
     */
     render() {
         let usersList = this.state.users.map((user) => {
-            return user.name
+            return <li><a href={`/users/${user._id}`}>{user.name}</a></li>
 
         })
         return (
@@ -117,7 +117,9 @@ export default class Users extends Component {
                 {/* Accessing the value of message from the state object */}
                 {/* <h1>{this.state.users}</h1> */}
                 <h1>all users</h1>
+                <ul>
                 {usersList}
+                </ul>
                 <button onClick={this.handleToggledNewUserForm}>Add User Account</button>
             </div>
         )
