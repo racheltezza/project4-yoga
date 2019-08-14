@@ -4,6 +4,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import EventIcon from '@material-ui/icons/Event'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -85,7 +90,14 @@ export default class Events extends Component {
             return <Redirect to={`/users/${this.props.match.params.userId}/eventsLists`} />
         }
         let eventsList = this.state.events.map((event) => {
-            return <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name}</Link>
+            return (
+                <ListItem>
+                <ListItemIcon>
+                  <EventIcon />
+                </ListItemIcon>
+                <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name}</Link>
+              </ListItem>
+            )
         })
         return (
             this.state.isNewEventFormShowing
@@ -108,9 +120,11 @@ export default class Events extends Component {
                 {/* Accessing the value of message from the state object */}
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/`}>Back to all Lists</Link>
                 <h1>One List</h1>
+                <List>
                 {eventsList}
-                <button onClick={this.handleToggleNewEventForm}>Add New Event</button>
-                <button onClick={this.handleDeleteEventsList}>Delete this List</button>
+                </List>
+                <Button onClick={this.handleToggleNewEventForm} variant="outlined" color="primary">Add New Event</Button>
+                <Button onClick={this.handleDeleteEventsList} variant="outlined" color="primary">Delete this List</Button>
             </div>
         )
     }

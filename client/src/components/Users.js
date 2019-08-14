@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -81,7 +82,7 @@ export default class Users extends Component {
             <ListItemIcon>
               <AccountIcon />
             </ListItemIcon>
-            <a href={`/users/${user._id}/eventsLists`}>{user.name}</a>
+            <Link to={`/users/${user._id}/eventsLists`}>{user.name}</Link>
           </ListItem>
             )
 

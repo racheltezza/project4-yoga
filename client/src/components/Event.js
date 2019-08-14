@@ -4,6 +4,11 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -125,17 +130,29 @@ export default class Event extends Component {
             </form>
             :
             <div>
-                {/* Accessing the value of message from the state object */}
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`}>Back to All events</Link>
-                <h1>{this.state.event.name}</h1>
-                <ul>
-                <li>City: {this.state.event.city}</li>
-                <li>Address: {this.state.event.address}</li>
-                <li>Date: {this.state.event.date}</li>
-                <li>Description: {this.state.event.description}</li>
-                </ul>
-                <button onClick={this.handleToggleEditEventForm}>Edit Event</button>
-                <button onClick={this.handleDeleteEvent}>Delete Event</button>
+    
+                <Card>
+                    <CardContent>
+                    <Typography color="textSecondary" gutterBottom>
+                    {this.state.event.date}
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                    {this.state.event.name}
+                    </Typography>
+                    <Typography color="textSecondary">
+                    {this.state.event.address}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        <br />
+                        {this.state.event.description}
+                    </Typography>
+                    </CardContent>
+                    <CardActions>
+                            <Button size="small" onClick={this.handleToggleEditEventForm}>Edit Event</Button>
+                            <Button size="small" onClick={this.handleDeleteEvent}>Delete Event</Button>
+                    </CardActions>
+                </Card>
             </div>
         )
     }
