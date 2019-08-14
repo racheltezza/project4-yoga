@@ -4,6 +4,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import AccountIcon from '@material-ui/icons/AccountCircle';
+import ListIcon from '@material-ui/icons/List'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -70,9 +76,14 @@ export default class EventsList extends Component {
     */
     render() {
         let eventsListsList = this.state.eventsLists.map((list) => {
-            return <li>
-                    <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}/events`}>{list.name}</Link>
-                </li>
+            return(
+                <ListItem>
+                    <ListItemIcon>
+                        <ListIcon/>
+                    </ListItemIcon>
+                <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}/events`}>{list.name}</Link>
+                <ListItem/>
+            )
         })
         return (
             this.state.isNewEventsListFormShowing
@@ -83,16 +94,16 @@ export default class EventsList extends Component {
                 <input type='submit' value='Add New List'/>
             </form>
             :
-            <div>
-                {/* Acc}essing the value of message from the state object */}
+      
+                <div>
                 <Link to='/'>Back to all users</Link>
                 <Link to={`/users/${this.props.match.params.userId}`}>View Profile Info</Link>
                 <h1>My events lists</h1>
-                <ul>
+                <List>
                     {eventsListsList}
-                </ul>
-                <button onClick={this.handleToggleNewListForm}>Add New Yoga Event List</button>
-            </div>
+                </List>
+                <Button onClick={this.handleToggleNewListForm} variant="outlined" color="primary">Add New Yoga Event List</Button>
+                </div>
         )
     }
 }

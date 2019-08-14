@@ -4,7 +4,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Button from '@material-ui/core/Button';
-
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import AccountIcon from '@material-ui/icons/AccountCircle'
 /* Step 2
  * Rename this class to reflect the component being created
  *
@@ -73,7 +76,14 @@ export default class Users extends Component {
     */
     render() {
         let usersList = this.state.users.map((user) => {
-            return <li><a href={`/users/${user._id}/eventsLists`}>{user.name}</a></li>
+            return(         
+            <ListItem>
+            <ListItemIcon>
+              <AccountIcon />
+            </ListItemIcon>
+            <a href={`/users/${user._id}/eventsLists`}>{user.name}</a>
+          </ListItem>
+            )
 
         })
         return (
@@ -115,12 +125,10 @@ export default class Users extends Component {
             </form>
             :
             <div>
-                {/* Accessing the value of message from the state object */}
-                {/* <h1>{this.state.users}</h1> */}
                 <h1>all users</h1>
-                <ul>
-                {usersList}
-                </ul>
+              <List>
+                  {usersList}
+              </List>
                 <Button onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</Button>
             </div>
         )
