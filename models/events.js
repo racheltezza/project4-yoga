@@ -25,7 +25,7 @@ const EventSchema = new mongoose.Schema({
  date: String,
  description: String,
  userId: mongoose.Types.ObjectId,
- eventsListId: mongoose.Types.ObjectId
+ listId: mongoose.Types.ObjectId
 })
 
 /* Step 3
@@ -61,8 +61,8 @@ function deleteEvent(eventId) {
   return EventCollection.findByIdAndDelete(eventId)
 }
 
-function getEventsByListId(eventsListId) {
-  return EventCollection.find({eventsListId: eventsListId})
+function getEventsByListId(listId) {
+  return EventCollection.find({listId: listId})
 }
 
 /* Step 5

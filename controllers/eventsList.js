@@ -25,7 +25,7 @@ const eventsListApi = require('../models/eventsList.js')
  * TODO: rename this from templateRouter to something that makes sense. (e.g:
  * `shopRouter`)
  */
-const eventsListRouter = express.Router()
+const eventsListRouter = express.Router({mergeParams: true})
 
 /* Step 4
  * 
@@ -51,6 +51,7 @@ eventsListRouter.get('/:listId', (req, res) => {
 })
 
 eventsListRouter.post('/', (req, res) => {
+  req.body.userId = req.params.userId
   return eventsListApi.createEventList(req.body)
   .then((list) => {
     res.json(list)

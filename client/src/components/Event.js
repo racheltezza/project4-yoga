@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom'
  * Rename this class to reflect the component being created
  *
  */
-export default class HelloWorld extends Component {
+export default class Event extends Component {
 
     /* Step 3
     * Create a state for the component to store view data
