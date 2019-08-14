@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
+import Button from '@material-ui/core/Button';
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -120,7 +121,7 @@ export default class Users extends Component {
                 <ul>
                 {usersList}
                 </ul>
-                <button onClick={this.handleToggledNewUserForm}>Add User Account</button>
+                <Button onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</Button>
             </div>
         )
     }
