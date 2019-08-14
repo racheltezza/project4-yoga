@@ -8,7 +8,6 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import AccountIcon from '@material-ui/icons/AccountCircle';
 import ListIcon from '@material-ui/icons/List'
 
 /* Step 2
@@ -68,21 +67,15 @@ export default class EventsList extends Component {
         })
     }
 
-    /* Step 5
-    *  The render function manages what is shown in the browser
-    *  TODO: delete the jsx returned
-    *   and replace it with your own custom jsx template
-    *
-    */
     render() {
         let eventsListsList = this.state.eventsLists.map((list) => {
             return(
                 <ListItem>
                     <ListItemIcon>
-                        <ListIcon/>
+                        <ListIcon />
                     </ListItemIcon>
-                <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}/events`}>{list.name}</Link>
-                <ListItem/>
+                    <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}/events`}>{list.name}</Link>
+                </ListItem>
             )
         })
         return (
@@ -94,7 +87,6 @@ export default class EventsList extends Component {
                 <input type='submit' value='Add New List'/>
             </form>
             :
-      
                 <div>
                 <Link to='/'>Back to all users</Link>
                 <Link to={`/users/${this.props.match.params.userId}`}>View Profile Info</Link>
