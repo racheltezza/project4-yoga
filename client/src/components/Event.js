@@ -81,7 +81,47 @@ export default class Event extends Component {
             this.state.isEditEventFormDisplayed
             ?
             <form onSubmit={this.handleEditEventSubmit}>
-                <input />
+                <label htmlFor='event-name'>Event Name: </label>
+                <input 
+                type='text' 
+                id='event-name' 
+                name ='name' 
+                onChange={this.handleInputChange} 
+                value={this.state.event.name}
+                />
+                <label htmlFor='event-city'>Event City: </label>
+                <input 
+                type='text' 
+                id='event-city' 
+                name ='city' 
+                onChange={this.handleInputChange} 
+                value={this.state.event.city}
+                />
+                <label htmlFor='event-address'>Event Address: </label>
+                <input 
+                type='text' 
+                id='event-address' 
+                name ='address' 
+                onChange={this.handleInputChange} 
+                value={this.state.event.address}
+                />
+                <label htmlFor='event-date'>Event Date: </label>
+                <input 
+                type='text' 
+                id='event-date' 
+                name ='date' 
+                onChange={this.handleInputChange} 
+                value={this.state.event.date}
+                />
+                <label htmlFor='event-description'>Event Description: </label>
+                <input 
+                type='text' 
+                id='event-description' 
+                name ='description' 
+                onChange={this.handleInputChange} 
+                value={this.state.event.description}
+                />
+                <input type='submit' value='update event' />
             </form>
             :
             <div>
