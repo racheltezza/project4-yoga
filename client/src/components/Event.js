@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -17,7 +17,8 @@ export default class Event extends Component {
     */
     state = {
         event: {},
-        isEditEventFormDisplayed: false
+        isEditEventFormDisplayed: false,
+        redirectToEventsList: false
     }
 
     /* Step 4
@@ -28,10 +29,42 @@ export default class Event extends Component {
     *   -REMINDER remember `setState` it is an async function
     */
     componentDidMount() {
+        this.getOneEvent()
+    }
+    
+    getOneEvent = () => {
         axios.get(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${this.props.match.params.eventId}`)
             .then((res) => {
                 this.setState({event: res.data})
             })
+    }
+
+    handleDeleteEvent = () => {
+        axios.delete(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${this.props.match.params.eventId}`)
+        .then(() => {
+            this.setState({redirectToEventsList: true})
+        })
+    }
+
+    handleInputChange = (event) => {
+        let copiedEvent = {...this.state.event}
+        copiedEvent[event.target.name] = event.target.value
+        this.setState({event: copiedEvent})
+    }
+
+    handleEditEventSubmit = (event) => {
+        event.preventDefault()
+        axios.put(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${this.props.match.params.eventId}`, this.state.event)
+        .then((res) => {
+            this.setState({
+                event: res.data,
+                isEditEventFormDisplayed: false
+            })
+        })
+    }
+
+    handleToggleEditEventForm = () => {
+        this.setState({isEditEventFormDisplayed: true})
     }
 
     /* Step 5
@@ -41,7 +74,16 @@ export default class Event extends Component {
     *
     */
     render() {
+        if(this.state.redirectToEventsList) {
+            return <Redirect to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/`} />
+        }
         return (
+            this.state.isEditEventFormDisplayed
+            ?
+            <form onSubmit={this.handleEditEventSubmit}>
+                <input />
+            </form>
+            :
             <div>
                 {/* Accessing the value of message from the state object */}
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`}>Back to All events</Link>
@@ -52,6 +94,8 @@ export default class Event extends Component {
                 <li>Date: {this.state.event.date}</li>
                 <li>Description: {this.state.event.description}</li>
                 </ul>
+                <button onClick={this.handleToggleEditEventForm}>Edit Event</button>
+                <button onClick={this.handleDeleteEvent}>Delete Event</button>
             </div>
         )
     }
