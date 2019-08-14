@@ -85,6 +85,7 @@ export default class EventsList extends Component {
             :
             <div>
                 {/* Acc}essing the value of message from the state object */}
+                <Link to='/'>Back to all users</Link>
                 <Link to={`/users/${this.props.match.params.userId}`}>View Profile Info</Link>
                 <h1>My events lists</h1>
                 <ul>
