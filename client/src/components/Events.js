@@ -14,7 +14,9 @@ import EventIcon from '@material-ui/icons/Event'
  * Rename this class to reflect the component being created
  *
  */
-export default class Events extends Component {
+let AUTH_TOK = 'XIHEXMGEIERWI6VZFO'
+
+ export default class Events extends Component {
 
     /* Step 3
     * Create a state for the component to store view data
@@ -40,6 +42,7 @@ export default class Events extends Component {
     *   setState can be run here as well
     *   -REMINDER remember `setState` it is an async function
     */
+   
     componentDidMount() {
         this.getAllEvents()
     }
@@ -77,6 +80,16 @@ export default class Events extends Component {
         this.setState((state) => {
           return {isNewEventFormShowing: true}
         })
+    }
+    
+
+
+    getEventbriteEvents = async (e) => {
+        e.preventDefault()
+        const city = e.target.elements.city.value;
+        const api_call = await fetch(`https://www.eventbriteapi.com/v3/users/me/?token=J6ZSGEZUCIGAIE5CIOIH`);
+        const data = await api_call.json()
+        console.log(data)
     }
 
     /* Step 5
@@ -125,6 +138,11 @@ export default class Events extends Component {
                 </List>
                 <Button onClick={this.handleToggleNewEventForm} variant="outlined" color="primary">Add New Event</Button>
                 <Button onClick={this.handleDeleteEventsList} variant="outlined" color="primary">Delete this List</Button>
+
+                <form onSubmit={this.getEventbriteEvents}>
+                    <input type='text' placeholder='city...' name='city' />
+                    <button>Search</button>
+                </form>
             </div>
         )
     }

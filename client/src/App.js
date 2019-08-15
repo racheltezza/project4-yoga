@@ -17,7 +17,7 @@ function App() {
       <AppBar position="static" color="default">
         <Toolbar>
         <Typography variant="h6" color="inherit">
-          <span class='navbar-site-title'>Ajar Yoga</span>
+          <span className='navbar-site-title'>Ajar Yoga</span>
           </Typography>
       </Toolbar>
       </AppBar>
