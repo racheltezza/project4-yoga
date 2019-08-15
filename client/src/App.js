@@ -6,11 +6,21 @@ import EventsList from './components/EventsList.js'
 import Events from './components/Events.js'
 import Event from './components/Event.js'
 import './App.css';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 
 function App() {
   return (
     <div className="App">
+      <AppBar position="static" color="default">
+        <Toolbar>
+        <Typography variant="h6" color="inherit">
+          <span class='navbar-site-title'>Ajar Yoga</span>
+          </Typography>
+      </Toolbar>
+      </AppBar>
       <Router>
         <Switch>
           <Route exact path="/" component={Users}/>
