@@ -36,7 +36,8 @@ let AUTHORIZATION = 'Bearer' + ' ' + process.env.REACT_APP_EVENTBRITE_API_KEY
         eventsSearched: [],
         eventName: "",
         eventAddress: "",
-        eventDate: ""
+        eventDate: "",
+        error: ""
     }
 
     /* Step 4
@@ -93,11 +94,15 @@ let AUTHORIZATION = 'Bearer' + ' ' + process.env.REACT_APP_EVENTBRITE_API_KEY
         const city = event.target.elements.city.value;
         const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search?location.address=${city}&location.within=10km&expand=venue`, {method: 'GET', headers: {'Authorization': AUTHORIZATION}});
         const data = await api_call.json()
-        console.log(data)
-        this.setState({ eventName: data.events[0].name.text, eventAddress: data.events[0].venue.address.address_1, eventDate: data.events[0].start.local,
-            eventsSearched: data.events})
-        console.log(this.state.eventName)
-        console.log(this.state.eventsSearched)
+        if(city) {
+            console.log(data)
+            this.setState({ eventName: data.events[0].name.text, eventAddress: data.events[0].venue.address.address_1, eventDate: data.events[0].start.local,
+                eventsSearched: data.events})
+            console.log(this.state.eventName)
+            console.log(this.state.eventsSearched)
+        } else {
+            this.setState({error: 'Please enter a city'})
+        }
     }
 
     render() {
@@ -151,17 +156,14 @@ let AUTHORIZATION = 'Bearer' + ' ' + process.env.REACT_APP_EVENTBRITE_API_KEY
                 <Button onClick={this.handleDeleteEventsList} variant="outlined" color="primary">Delete this List</Button>
 
                 <form onSubmit={this.getEventbriteEvents}>
-                    <input type='text' placeholder='city...' name='city' />
+                    <label htmlFor='city-search'>Search events by city:</label>
+                    <input id='city-search' type='text' placeholder='city...' name='city' />
                     <button>Search</button>
                 </form>
-
-                <p>Event Name: {this.state.eventName}</p>
-                <p>Event Address: {this.state.eventAddress}</p>
-                <p>Event Date/Time: {this.state.eventDate}</p>
-
                 <ul>
                     {searchedEventsList}
                 </ul>
+                <p>{this.state.error}</p>
             </div>
         )
     }
