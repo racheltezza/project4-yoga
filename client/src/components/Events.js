@@ -14,7 +14,9 @@ import EventIcon from '@material-ui/icons/Event'
  * Rename this class to reflect the component being created
  *
  */
-let AUTH_TOK = 'XIHEXMGEIERWI6VZFO'
+console.log(process.env.REACT_APP_EVENTBRITE_API_KEY)
+let AUTHORIZATION = 'Bearer' + ' ' + process.env.REACT_APP_EVENTBRITE_API_KEY
+console.log(AUTHORIZATION)
 
  export default class Events extends Component {
 
@@ -32,7 +34,8 @@ let AUTH_TOK = 'XIHEXMGEIERWI6VZFO'
             description: ""
         },
         isNewEventFormShowing: false,
-        redirectToEventsList: false
+        redirectToEventsList: false,
+        eventName: ""
     }
 
     /* Step 4
@@ -84,13 +87,32 @@ let AUTH_TOK = 'XIHEXMGEIERWI6VZFO'
     
 
 
-    getEventbriteEvents = async (e) => {
-        e.preventDefault()
-        const city = e.target.elements.city.value;
-        const api_call = await fetch(`https://www.eventbriteapi.com/v3/users/me/?token=J6ZSGEZUCIGAIE5CIOIH`);
+    getEventbriteEvents = async (event) => {
+        event.preventDefault()
+        const city = event.target.elements.city.value;
+        const api_call = await fetch(`https://www.eventbriteapi.com/v3/events/search?location.address=${city}&location.within=10km&expand=venue`, {method: 'GET', headers: {'Authorization': AUTHORIZATION}});
         const data = await api_call.json()
         console.log(data)
+        this.setState({ eventName: data.name})
     }
+
+    // https://www.eventbriteapi.com/v3/users/me   -H 'Authorization: Bearer PERSONAL_OAUTH_TOKEN'
+
+// getEvents = () => {
+//     axios.get('https://www.eventbriteapi.com/v3/categories/103/', { 'headers': { 'Authorization': AUTH_TOKEN } })
+//         .then((response) => {
+//         console.log(response.data);
+//         })
+//     }
+
+
+// getThisEevent = (event) => {
+//     event.preventDefault()
+//     axios.get({url:'https://www.eventbriteapi.com/v3/users/me', dataType: 'json', headers: {'Authorization': AUTH_TOKEN}})
+//     .then((response) => {
+//         console.log(response.data)
+//     })
+// }
 
     /* Step 5
     *  The render function manages what is shown in the browser
@@ -143,6 +165,8 @@ let AUTH_TOK = 'XIHEXMGEIERWI6VZFO'
                     <input type='text' placeholder='city...' name='city' />
                     <button>Search</button>
                 </form>
+
+                <p>{this.eventName}</p>
             </div>
         )
     }
