@@ -14,9 +14,7 @@ import EventIcon from '@material-ui/icons/Event'
  * Rename this class to reflect the component being created
  *
  */
-console.log(process.env.REACT_APP_EVENTBRITE_API_KEY)
 let AUTHORIZATION = 'Bearer' + ' ' + process.env.REACT_APP_EVENTBRITE_API_KEY
-console.log(AUTHORIZATION)
 
  export default class Events extends Component {
 
@@ -35,7 +33,10 @@ console.log(AUTHORIZATION)
         },
         isNewEventFormShowing: false,
         redirectToEventsList: false,
-        eventName: ""
+        eventsSearched: [],
+        eventName: "",
+        eventAddress: "",
+        eventDate: ""
     }
 
     /* Step 4
@@ -90,40 +91,28 @@ console.log(AUTHORIZATION)
     getEventbriteEvents = async (event) => {
         event.preventDefault()
         const city = event.target.elements.city.value;
-        const api_call = await fetch(`https://www.eventbriteapi.com/v3/events/search?location.address=${city}&location.within=10km&expand=venue`, {method: 'GET', headers: {'Authorization': AUTHORIZATION}});
+        const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search?location.address=${city}&location.within=10km&expand=venue`, {method: 'GET', headers: {'Authorization': AUTHORIZATION}});
         const data = await api_call.json()
         console.log(data)
-        this.setState({ eventName: data.name})
+        this.setState({ eventName: data.events[0].name.text, eventAddress: data.events[0].venue.address.address_1, eventDate: data.events[0].start.local,
+            eventsSearched: data.events})
+        console.log(this.state.eventName)
+        console.log(this.state.eventsSearched)
     }
 
-    // https://www.eventbriteapi.com/v3/users/me   -H 'Authorization: Bearer PERSONAL_OAUTH_TOKEN'
-
-// getEvents = () => {
-//     axios.get('https://www.eventbriteapi.com/v3/categories/103/', { 'headers': { 'Authorization': AUTH_TOKEN } })
-//         .then((response) => {
-//         console.log(response.data);
-//         })
-//     }
-
-
-// getThisEevent = (event) => {
-//     event.preventDefault()
-//     axios.get({url:'https://www.eventbriteapi.com/v3/users/me', dataType: 'json', headers: {'Authorization': AUTH_TOKEN}})
-//     .then((response) => {
-//         console.log(response.data)
-//     })
-// }
-
-    /* Step 5
-    *  The render function manages what is shown in the browser
-    *  TODO: delete the jsx returned
-    *   and replace it with your own custom jsx template
-    *
-    */
     render() {
         if(this.state.redirectToEventsList) {
             return <Redirect to={`/users/${this.props.match.params.userId}/eventsLists`} />
         }
+        let searchedEventsList = this.state.eventsSearched.map((event) => {
+            return (
+                <div>
+                <p>Event: {event.name.text} </p>
+                <p>Address: {event.venue.address.address_1}</p>
+                <li>Date/Time: {event.start.local}</li>
+                </div>
+            )
+        })
         let eventsList = this.state.events.map((event) => {
             return (
                 <ListItem>
@@ -166,7 +155,13 @@ console.log(AUTHORIZATION)
                     <button>Search</button>
                 </form>
 
-                <p>{this.eventName}</p>
+                <p>Event Name: {this.state.eventName}</p>
+                <p>Event Address: {this.state.eventAddress}</p>
+                <p>Event Date/Time: {this.state.eventDate}</p>
+
+                <ul>
+                    {searchedEventsList}
+                </ul>
             </div>
         )
     }
