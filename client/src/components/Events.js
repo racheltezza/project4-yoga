@@ -92,7 +92,7 @@ let AUTHORIZATION = 'Bearer' + ' ' + process.env.REACT_APP_EVENTBRITE_API_KEY
     getEventbriteEvents = async (event) => {
         event.preventDefault()
         const city = event.target.elements.city.value;
-        const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search?location.address=${city}&location.within=10km&expand=venue`, {method: 'GET', headers: {'Authorization': AUTHORIZATION}});
+        const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search?location.address=${city}&location.within=10km&expand=venue&categories=107&subcategories=7005`, {method: 'GET', headers: {'Authorization': AUTHORIZATION}});
         const data = await api_call.json()
         if(city) {
             console.log(data)
