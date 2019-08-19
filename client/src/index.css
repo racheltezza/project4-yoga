@@ -1,13 +1,37 @@
 body {
-  margin: 0;
+  margin: 100px 0 0 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  background-image: url('/client/public/yoga.jpg');
-  background-color: #F0F5E8;
+  /* background-image: url('/client/public/yoga.jpg');
+  background-color: #F0F5E8; */
+  background-image: url('./crystal_buddha.jpg');
+}
+
+.app-bar {
+  background-color: blueviolet;
+  opacity: .5;
+  display: flex;
+  margin: 0 0 30px 0;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  
+}
+
+.lists-list {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  margin: 0 auto;
+  
 }
 
 code {
@@ -22,4 +46,33 @@ li {
 
 .navbar-site-title {
   font-family: 'Shrikhand', cursive;
+}
+
+.nav-link-back {
+  display: flex;
+  margin: 0 auto;
+}
+
+.nav-link-profile {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto;
+}
+.card {
+  max-width: 30vw;
+  max-height: 70vh;
+  display: inline-grid;
+  margin: 10px;
+}
+
+.media {
+  height: 0;
+  padding-top: 56.25%;
+}
+
+.search-items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
+  grid-auto-rows: minmax(600px, auto);
+  /* grid-gap: .5em; */
 }

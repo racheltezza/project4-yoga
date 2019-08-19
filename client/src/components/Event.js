@@ -9,6 +9,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -86,7 +87,7 @@ export default class Event extends Component {
             this.state.isEditEventFormDisplayed
             ?
             <form onSubmit={this.handleEditEventSubmit}>
-                <label htmlFor='event-name'>Event Name: </label>
+                {/* <label htmlFor='event-name'>Event Name: </label>
                 <input 
                 type='text' 
                 id='event-name' 
@@ -125,14 +126,54 @@ export default class Event extends Component {
                 name ='description' 
                 onChange={this.handleInputChange} 
                 value={this.state.event.description}
+                /> */}
+                <TextField
+                id="standard-uncontrolled"
+                label="Event Name"
+                defaultValue={this.state.event.name}
+                name='name'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Event Date"
+                defaultValue={this.state.event.date}
+                name='date'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Event City"
+                defaultValue={this.state.event.city}
+                name='city'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Event Address"
+                defaultValue={this.state.event.address}
+                name='address'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Event Description"
+                defaultValue={this.state.event.description}
+                name='description'
+                margin="normal"
+                onChange={this.handleInputChange}
                 />
                 <input type='submit' value='update event' />
             </form>
             :
             <div>
-                <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`}>Back to All events</Link>
+                <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`} className="nav-link-back">Back to All events</Link>
     
-                <Card>
+                <Card className='card'>
                     <CardContent>
                     <Typography color="textSecondary" gutterBottom>
                     {this.state.event.date}

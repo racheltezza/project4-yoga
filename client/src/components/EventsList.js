@@ -8,7 +8,9 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListIcon from '@material-ui/icons/List'
+import ListIcon from '@material-ui/icons/List';
+import AccountIcon from '@material-ui/icons/AccountCircle';
+import TextField from '@material-ui/core/TextField';
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -82,14 +84,24 @@ export default class EventsList extends Component {
             this.state.isNewEventsListFormShowing
             ?
             <form onSubmit={this.handleSubmitNewListForm}>
-                <label htmlFor='new-list-name'>List Name: </label>
-                <input onChange={this.handleInputChange} name='name' id='new-list-name'/>
+                {/* <label htmlFor='new-list-name'>List Name: </label>
+                <input onChange={this.handleInputChange} name='name' id='new-list-name'/> */}
+                <TextField
+                id="standard-uncontrolled"
+                label="Yoga List Name"
+                // defaultValue="foo"
+                name='name'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
                 <input type='submit' value='Add New List'/>
             </form>
             :
                 <div>
-                <Link to='/'>Back to all users</Link>
-                <Link to={`/users/${this.props.match.params.userId}`}>View Profile Info</Link>
+                    <div>
+                <Link to='/' className="nav-link-back">Back to all users</Link>
+                <Link to={`/users/${this.props.match.params.userId}`} className="nav-link-profile"><AccountIcon/></Link>
+                </div>
                 <h1>My events lists</h1>
                 <List>
                     {eventsListsList}

@@ -8,7 +8,8 @@ import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import AccountIcon from '@material-ui/icons/AccountCircle'
+import AccountIcon from '@material-ui/icons/AccountCircle';
+import TextField from '@material-ui/core/TextField';
 /* Step 2
  * Rename this class to reflect the component being created
  *
@@ -91,14 +92,46 @@ export default class Users extends Component {
             this.state.isNewUserFormShowing
             ?
             <form onSubmit={this.handleNewUserSubmit}>
-                <label htmlFor='new-user-name'>Name: </label>
-                <input 
+                {/* <label htmlFor='new-user-name'>Name: </label> */}
+                {/* <input 
                 name='name' 
                 id='new-user-name' 
                 type='text' 
                 onChange={this.handleInputChange}
+                /> */}
+                <TextField
+                id="standard-uncontrolled"
+                label="Name"
+                // defaultValue="foo"
+                name='name'
+                margin="normal"
+                onChange={this.handleInputChange}
                 />
-                <label htmlFor='new-user-userName'>Username: </label>
+                <TextField
+                id="standard-uncontrolled"
+                label="Username"
+                // defaultValue="foo"
+                name='userName'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Password"
+                // defaultValue="foo"
+                name='password'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="City"
+                // defaultValue="foo"
+                name='city'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                {/* <label htmlFor='new-user-userName'>Username: </label>
                 <input
                 name='userName'
                 id='new-user-userName'
@@ -118,7 +151,7 @@ export default class Users extends Component {
                 id='new-user-city'
                 type='text'
                 onChange={this.handleInputChange}
-                />
+                /> */}
                 <input
                 type='submit'
                 value='Create Account'
@@ -127,7 +160,7 @@ export default class Users extends Component {
             :
             <div>
                 <h1>all users</h1>
-              <List>
+              <List className='users-list'>
                   {usersList}
               </List>
                 <Button onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</Button>

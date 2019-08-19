@@ -14,7 +14,7 @@ import Typography from '@material-ui/core/Typography';
 function App() {
   return (
     <div className="App">
-      <AppBar position="static" color="default">
+      <AppBar className="app-bar">
         <Toolbar>
         <Typography variant="h6" color="inherit">
           <span className='navbar-site-title'>Ajar Yoga</span>
