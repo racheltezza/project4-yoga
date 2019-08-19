@@ -35,12 +35,22 @@ import TextField from '@material-ui/core/TextField';
 let AUTHORIZATION = 'Bearer' + ' ' + process.env.REACT_APP_EVENTBRITE_API_KEY
 
 const MyButton = styled(Button)({
-    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    background: 'linear-gradient(45deg, #c684f5 30%, #84e4f5 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(134, 201, 242, .3)',
+    color: 'white',
+    height: 40,
+    padding: '0 30px',
+  });
+
+  const DeleteButton = styled(Button)({
+    background: 'red',
     border: 0,
     borderRadius: 3,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
-    height: 48,
+    height: 40,
     padding: '0 30px',
   });
 
@@ -85,9 +95,6 @@ const MyButton = styled(Button)({
         isNewEventFormShowing: false,
         redirectToEventsList: false,
         eventsSearched: [],
-        eventName: "",
-        eventAddress: "",
-        eventDate: "",
         error: ""
     }
 
@@ -164,7 +171,7 @@ const MyButton = styled(Button)({
         let searchedEventsList = this.state.eventsSearched.map((event) => {
             return (
                 <div>
-                {/* <img src={event.logo.url} atl="Yoga-Event"/>
+                {/* <img src={event.logo.url} alt="Yoga-Event"/>
                 <p>Event: {event.name.text} </p>
                 <p>Address: {event.venue.address.address_1}</p>
                 <li>Date/Time: {event.start.local}</li>
@@ -172,12 +179,12 @@ const MyButton = styled(Button)({
      <Card className='card'>
       <CardHeader
         title={event.name.text}
-        subheader="September 14, 2016"
+        subheader={event.start.local}
       />
       <CardMedia
         className='media'
         image={event.logo.url}
-        title={event.start.local}
+        title={event.name.text}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -259,25 +266,25 @@ const MyButton = styled(Button)({
             <div>
                 {/* Accessing the value of message from the state object */}
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/`} className="nav-link-back">Back to all Lists</Link>
-                <h1>One List</h1>
-                <List>
+                <h1>One List{this.state.name}</h1>
+                <MyButton onClick={this.handleToggleNewEventForm}>Add New Event</MyButton>
+                <DeleteButton onClick={this.handleDeleteEventsList}>Delete this List</DeleteButton>
+                <List className='lists-list'>
                 {eventsList}
                 </List>
                 {/* <Button onClick={this.handleToggleNewEventForm} variant="outlined" color="primary">Add New Event</Button> */}
-                <MyButton onClick={this.handleToggleNewEventForm}>Add New Event</MyButton>
-                <Button onClick={this.handleDeleteEventsList} variant="outlined" color="primary">Delete this List</Button>
 
                 <form onSubmit={this.getEventbriteEvents}>
                     <label htmlFor='city-search'>Browse events by city:</label>
-                    {/* <input id='city-search' type='text' placeholder='city...' name='city' /> */}
-                    <TextField
+                    <input id='city-search' type='text' placeholder='city...' name='city' />
+                    {/* <TextField
                         id="outlined-name"
                         label="City"
                         name='city'
                         margin="normal"
                         variant="outlined"
-                    />
-                    <Button variant='outlined'>Search</Button>
+                    /> */}
+                    <button>Search</button>
                 </form>
                 <div className='search-items'>
                     {searchedEventsList}

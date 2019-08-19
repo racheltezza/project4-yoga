@@ -10,10 +10,23 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import TextField from '@material-ui/core/TextField';
+import { styled } from '@material-ui/styles';
 /* Step 2
  * Rename this class to reflect the component being created
  *
  */
+
+const MyButton = styled(Button)({
+    background: 'linear-gradient(45deg, #c684f5 30%, #84e4f5 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(134, 201, 242, .3)',
+    color: 'white',
+    height: 40,
+    padding: '0 30px',
+  });
+
+
 export default class Users extends Component {
 
     /* Step 3
@@ -159,11 +172,11 @@ export default class Users extends Component {
             </form>
             :
             <div>
-                <h1>all users</h1>
+                <h1 className='page-logo'>AJAR</h1>
+                <MyButton onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</MyButton>
               <List className='users-list'>
                   {usersList}
               </List>
-                <Button onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</Button>
             </div>
         )
     }

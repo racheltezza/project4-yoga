@@ -11,11 +11,24 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListIcon from '@material-ui/icons/List';
 import AccountIcon from '@material-ui/icons/AccountCircle';
 import TextField from '@material-ui/core/TextField';
+import { styled } from '@material-ui/styles';
 
 /* Step 2
  * Rename this class to reflect the component being created
  *
  */
+
+const MyButton = styled(Button)({
+    background: 'linear-gradient(45deg, #c684f5 30%, #84e4f5 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(134, 201, 242, .3)',
+    color: 'white',
+    height: 40,
+    padding: '0 30px',
+  });
+
+
 export default class EventsList extends Component {
 
     /* Step 3
@@ -98,15 +111,15 @@ export default class EventsList extends Component {
             </form>
             :
                 <div>
-                    <div>
+                    <div className='clearfix'>
                 <Link to='/' className="nav-link-back">Back to all users</Link>
                 <Link to={`/users/${this.props.match.params.userId}`} className="nav-link-profile"><AccountIcon/></Link>
                 </div>
                 <h1>My events lists</h1>
-                <List>
+                <List className='lists-list'>
                     {eventsListsList}
                 </List>
-                <Button onClick={this.handleToggleNewListForm} variant="outlined" color="primary">Add New Yoga Event List</Button>
+                <MyButton onClick={this.handleToggleNewListForm}>Add New Yoga Event List</MyButton>
                 </div>
         )
     }
