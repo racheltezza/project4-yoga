@@ -101,18 +101,17 @@ export default class EventsList extends Component {
         return (
             this.state.isNewEventsListFormShowing
             ?
-            <form onSubmit={this.handleSubmitNewListForm}>
+            <form onSubmit={this.handleSubmitNewListForm} className='new-list-form'>
                 {/* <label htmlFor='new-list-name'>List Name: </label>
                 <input onChange={this.handleInputChange} name='name' id='new-list-name'/> */}
                 <TextField
                 id="standard-uncontrolled"
                 label="Yoga List Name"
-                // defaultValue="foo"
                 name='name'
                 margin="normal"
                 onChange={this.handleInputChange}
                 />
-                <input type='submit' value='Add New List'/>
+                <input className='new-list-input' type='submit' value='Add New List'/>
             </form>
             :
                 <div>

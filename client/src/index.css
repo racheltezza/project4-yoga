@@ -129,6 +129,30 @@ ul {
 } */
 
 
-.MuiListItem-root {
-  color: palevioletred;
+.event-search {
+  border: .5px solid black;
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+/* .new-list-form {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+} */
+
+.new-list-input {
+  margin: 50px 10px auto;
+}
+
+.search-input {
+  margin: 40px;
+}
+
+.seach-label {
+  margin: 40px;
 }

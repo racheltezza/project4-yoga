@@ -83,8 +83,8 @@ export default class User extends Component {
         return (
             this.state.isEditUserFormShowing
             ?
-            <form>
-                <input value={this.state.user.name} />
+            <form onSubmit={this.handleEditUserSubmit}>
+                <input onChange={this.handleInputChange} value={this.state.user.name} />
             </form>
             :
             <div>
@@ -96,7 +96,7 @@ export default class User extends Component {
                     <li>Password: {this.state.user.password}</li>
                     <li>City: {this.state.user.city}</li>
                 </ul>
-                <button onClick={this.handleToggleEditForm}>Edit User</button>
+                {/* <button onClick={this.handleToggleEditForm}>Edit User</button> */}
                 <button onClick={this.handleDeleteUser}>Delete User</button>
             </div>
         )

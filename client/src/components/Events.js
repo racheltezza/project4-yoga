@@ -43,6 +43,7 @@ const MyButton = styled(Button)({
     color: 'white',
     height: 40,
     padding: '0 30px',
+    margin: '15px',
   });
 
   const DeleteButton = styled(Button)({
@@ -53,35 +54,12 @@ const MyButton = styled(Button)({
     color: 'white',
     height: 40,
     padding: '0 30px',
+    margin: '15px',
   });
 
   const MyListItem = styled(ListItem) ({
       width: 270,
   });
-
-
-  const useStyles = makeStyles(theme => ({
-    card: {
-      maxWidth: 345,
-    },
-    media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
-    },
-    expand: {
-      transform: 'rotate(0deg)',
-      marginLeft: 'auto',
-      transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-      }),
-    },
-    expandOpen: {
-      transform: 'rotate(180deg)',
-    },
-    avatar: {
-      backgroundColor: red[500],
-    },
-  }));
 
  export default class Events extends Component {
 
@@ -170,7 +148,6 @@ const MyButton = styled(Button)({
         }
     }
     
-
     render() {
        
         if(this.state.redirectToEventsList) {
@@ -239,7 +216,6 @@ const MyButton = styled(Button)({
                 <TextField
                 id="standard-uncontrolled"
                 label="Event Date"
-                // defaultValue="foo"
                 name='date'
                 margin="normal"
                 onChange={this.handleInputChange}
@@ -247,7 +223,6 @@ const MyButton = styled(Button)({
                 <TextField
                 id="standard-uncontrolled"
                 label="Event City"
-                // defaultValue="foo"
                 name='city'
                 margin="normal"
                 onChange={this.handleInputChange}
@@ -255,7 +230,6 @@ const MyButton = styled(Button)({
                 <TextField
                 id="standard-uncontrolled"
                 label="Event Address"
-                // defaultValue="foo"
                 name='address'
                 margin="normal"
                 onChange={this.handleInputChange}
@@ -263,16 +237,14 @@ const MyButton = styled(Button)({
                 <TextField
                 id="standard-uncontrolled"
                 label="Event Description"
-                // defaultValue="foo"
                 name='description'
                 margin="normal"
                 onChange={this.handleInputChange}
                 />
-                <input type='submit' value='Add Event' />
+                <input type='submit' value='Add Event' className='new-list-input'/>
             </form>
             :
             <div>
-                {/* Accessing the value of message from the state object */}
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/`} className="nav-link-back">Back to all Lists</Link>
                 <h1>One List{this.state.name}</h1>
                 <div>
@@ -283,19 +255,22 @@ const MyButton = styled(Button)({
                 {eventsList}
                 </List>
                 {/* <Button onClick={this.handleToggleNewEventForm} variant="outlined" color="primary">Add New Event</Button> */}
-
+                <div className='event-search'>
+                    <h6 className='seach-label'>Browse Yoga events by city:</h6>
                 <form onSubmit={this.getEventbriteEvents}>
-                    <label htmlFor='city-search'>Browse events by city:</label>
-                    <input id='city-search' type='text' placeholder='city...' name='city' />
-                    {/* <TextField
+                    {/* <label htmlFor='city-search'>Browse events by city:</label> */}
+                    {/* <input id='city-search' type='text' placeholder='city...' name='city' /> */}
+                    <TextField
                         id="outlined-name"
                         label="City"
                         name='city'
                         margin="normal"
                         variant="outlined"
-                    /> */}
-                    <button>Search</button>
+                        className='search-input'
+                    />
+                    <input type='submit' value="Search" className='search-input'/>
                 </form>
+                </div>
                 <div className='search-items'>
                     {searchedEventsList}
                 </div>

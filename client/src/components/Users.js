@@ -24,6 +24,7 @@ const MyButton = styled(Button)({
     color: 'white',
     height: 40,
     padding: '0 30px',
+    margin: '30px'
   });
 
 const MyListItem = styled(ListItem) ({
@@ -172,12 +173,13 @@ export default class Users extends Component {
                 <input
                 type='submit'
                 value='Create Account'
+                className='new-list-input'
                 />
             </form>
             :
             <div>
                 {/* <h1 className='page-logo'>AJAR</h1> */}
-                <MyButton onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</MyButton>
+                <MyButton className='add-new-user' onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</MyButton>
               <List>
                   {usersList}
               </List>
