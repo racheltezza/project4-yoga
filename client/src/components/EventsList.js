@@ -28,6 +28,9 @@ const MyButton = styled(Button)({
     padding: '0 30px',
   });
 
+const MyListItem = styled(ListItem) ({
+      width: 270,
+  });
 
 export default class EventsList extends Component {
 
@@ -35,6 +38,8 @@ export default class EventsList extends Component {
     * Create a state for the component to store view data
     *
     */
+
+
     state = {
         eventsLists: [],
         newEventsList: {
@@ -85,12 +90,12 @@ export default class EventsList extends Component {
     render() {
         let eventsListsList = this.state.eventsLists.map((list) => {
             return(
-                <ListItem>
+                <MyListItem>
                     <ListItemIcon>
                         <ListIcon />
                     </ListItemIcon>
                     <Link to={`/users/${this.props.match.params.userId}/eventsLists/${list._id}/events`}>{list.name}</Link>
-                </ListItem>
+                </MyListItem>
             )
         })
         return (

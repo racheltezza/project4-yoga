@@ -26,6 +26,10 @@ const MyButton = styled(Button)({
     padding: '0 30px',
   });
 
+const MyListItem = styled(ListItem) ({
+    width: 270,
+});
+
 
 export default class Users extends Component {
 
@@ -92,12 +96,12 @@ export default class Users extends Component {
     render() {
         let usersList = this.state.users.map((user) => {
             return(         
-            <ListItem>
+            <MyListItem>
             <ListItemIcon>
               <AccountIcon />
             </ListItemIcon>
             <Link to={`/users/${user._id}/eventsLists`}>{user.name}</Link>
-          </ListItem>
+          </MyListItem>
             )
 
         })
@@ -172,9 +176,9 @@ export default class Users extends Component {
             </form>
             :
             <div>
-                <h1 className='page-logo'>AJAR</h1>
+                {/* <h1 className='page-logo'>AJAR</h1> */}
                 <MyButton onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</MyButton>
-              <List className='users-list'>
+              <List>
                   {usersList}
               </List>
             </div>

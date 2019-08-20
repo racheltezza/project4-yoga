@@ -54,6 +54,11 @@ const MyButton = styled(Button)({
     padding: '0 30px',
   });
 
+  const MyListItem = styled(ListItem) ({
+      width: 270,
+  });
+
+
   const useStyles = makeStyles(theme => ({
     card: {
       maxWidth: 345,
@@ -105,6 +110,7 @@ const MyButton = styled(Button)({
     *   setState can be run here as well
     *   -REMINDER remember `setState` it is an async function
     */
+   
    
     componentDidMount() {
         this.getAllEvents()
@@ -162,6 +168,7 @@ const MyButton = styled(Button)({
             this.setState({error: 'Please enter a city'})
         }
     }
+    
 
     render() {
        
@@ -198,12 +205,12 @@ const MyButton = styled(Button)({
         })
         let eventsList = this.state.events.map((event) => {
             return (
-                <ListItem className="lists-list">
+                <MyListItem className='event-list-item'>
                 <ListItemIcon>
                   <EventIcon />
                 </ListItemIcon>
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name}</Link>
-              </ListItem>
+              </MyListItem>
             )
         })
         return (
@@ -267,8 +274,10 @@ const MyButton = styled(Button)({
                 {/* Accessing the value of message from the state object */}
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/`} className="nav-link-back">Back to all Lists</Link>
                 <h1>One List{this.state.name}</h1>
+                <div>
                 <MyButton onClick={this.handleToggleNewEventForm}>Add New Event</MyButton>
                 <DeleteButton onClick={this.handleDeleteEventsList}>Delete this List</DeleteButton>
+                </div>
                 <List className='lists-list'>
                 {eventsList}
                 </List>
