@@ -34,6 +34,8 @@ import TextField from '@material-ui/core/TextField';
  */
 let AUTHORIZATION = 'Bearer' + ' ' + process.env.REACT_APP_EVENTBRITE_API_KEY
 
+console.log(AUTHORIZATION)
+
 const MyButton = styled(Button)({
     background: 'linear-gradient(45deg, #c684f5 30%, #84e4f5 90%)',
     border: 0,
