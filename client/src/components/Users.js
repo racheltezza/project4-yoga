@@ -3,12 +3,34 @@
  */
 import React, { Component } from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
-
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import AccountIcon from '@material-ui/icons/AccountCircle';
+import TextField from '@material-ui/core/TextField';
+import { styled } from '@material-ui/styles';
 /* Step 2
  * Rename this class to reflect the component being created
  *
  */
+
+const MyButton = styled(Button)({
+    background: 'linear-gradient(45deg, #c684f5 30%, #84e4f5 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(134, 201, 242, .3)',
+    color: 'white',
+    height: 40,
+    padding: '0 30px',
+  });
+
+const MyListItem = styled(ListItem) ({
+    width: 270,
+});
+
+
 export default class Users extends Component {
 
     /* Step 3
@@ -73,21 +95,60 @@ export default class Users extends Component {
     */
     render() {
         let usersList = this.state.users.map((user) => {
-            return <li><a href={`/users/${user._id}/eventsLists`}>{user.name}</a></li>
+            return(         
+            <MyListItem>
+            <ListItemIcon>
+              <AccountIcon />
+            </ListItemIcon>
+            <Link to={`/users/${user._id}/eventsLists`}>{user.name}</Link>
+          </MyListItem>
+            )
 
         })
         return (
             this.state.isNewUserFormShowing
             ?
             <form onSubmit={this.handleNewUserSubmit}>
-                <label htmlFor='new-user-name'>Name: </label>
-                <input 
+                {/* <label htmlFor='new-user-name'>Name: </label> */}
+                {/* <input 
                 name='name' 
                 id='new-user-name' 
                 type='text' 
                 onChange={this.handleInputChange}
+                /> */}
+                <TextField
+                id="standard-uncontrolled"
+                label="Name"
+                // defaultValue="foo"
+                name='name'
+                margin="normal"
+                onChange={this.handleInputChange}
                 />
-                <label htmlFor='new-user-userName'>Username: </label>
+                <TextField
+                id="standard-uncontrolled"
+                label="Username"
+                // defaultValue="foo"
+                name='userName'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Password"
+                // defaultValue="foo"
+                name='password'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="City"
+                // defaultValue="foo"
+                name='city'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                {/* <label htmlFor='new-user-userName'>Username: </label>
                 <input
                 name='userName'
                 id='new-user-userName'
@@ -107,7 +168,7 @@ export default class Users extends Component {
                 id='new-user-city'
                 type='text'
                 onChange={this.handleInputChange}
-                />
+                /> */}
                 <input
                 type='submit'
                 value='Create Account'
@@ -115,13 +176,11 @@ export default class Users extends Component {
             </form>
             :
             <div>
-                {/* Accessing the value of message from the state object */}
-                {/* <h1>{this.state.users}</h1> */}
-                <h1>all users</h1>
-                <ul>
-                {usersList}
-                </ul>
-                <Button onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</Button>
+                {/* <h1 className='page-logo'>AJAR</h1> */}
+                <MyButton onClick={this.handleToggledNewUserForm} variant="outlined" color="primary">Add User Account</MyButton>
+              <List>
+                  {usersList}
+              </List>
             </div>
         )
     }

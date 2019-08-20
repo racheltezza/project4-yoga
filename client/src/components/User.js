@@ -88,6 +88,7 @@ export default class User extends Component {
             </form>
             :
             <div>
+                <Link to={`/users/${this.state.user._id}/eventsLists`} className='nav-link-back'>Back to my lists</Link>
                 <h1>One User</h1>
                 <ul>
                     <li>Name: {this.state.user.name}</li>
@@ -95,7 +96,6 @@ export default class User extends Component {
                     <li>Password: {this.state.user.password}</li>
                     <li>City: {this.state.user.city}</li>
                 </ul>
-                <a href={`/users/${this.state.user._id}/eventsLists`}>Back to my lists</a>
                 <button onClick={this.handleToggleEditForm}>Edit User</button>
                 <button onClick={this.handleDeleteUser}>Delete User</button>
             </div>

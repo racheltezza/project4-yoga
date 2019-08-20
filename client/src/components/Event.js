@@ -4,6 +4,12 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -81,7 +87,7 @@ export default class Event extends Component {
             this.state.isEditEventFormDisplayed
             ?
             <form onSubmit={this.handleEditEventSubmit}>
-                <label htmlFor='event-name'>Event Name: </label>
+                {/* <label htmlFor='event-name'>Event Name: </label>
                 <input 
                 type='text' 
                 id='event-name' 
@@ -120,22 +126,74 @@ export default class Event extends Component {
                 name ='description' 
                 onChange={this.handleInputChange} 
                 value={this.state.event.description}
+                /> */}
+                <TextField
+                id="standard-uncontrolled"
+                label="Event Name"
+                defaultValue={this.state.event.name}
+                name='name'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Event Date"
+                defaultValue={this.state.event.date}
+                name='date'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Event City"
+                defaultValue={this.state.event.city}
+                name='city'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Event Address"
+                defaultValue={this.state.event.address}
+                name='address'
+                margin="normal"
+                onChange={this.handleInputChange}
+                />
+                <TextField
+                id="standard-uncontrolled"
+                label="Event Description"
+                defaultValue={this.state.event.description}
+                name='description'
+                margin="normal"
+                onChange={this.handleInputChange}
                 />
                 <input type='submit' value='update event' />
             </form>
             :
             <div>
-                {/* Accessing the value of message from the state object */}
-                <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`}>Back to All events</Link>
-                <h1>{this.state.event.name}</h1>
-                <ul>
-                <li>City: {this.state.event.city}</li>
-                <li>Address: {this.state.event.address}</li>
-                <li>Date: {this.state.event.date}</li>
-                <li>Description: {this.state.event.description}</li>
-                </ul>
-                <button onClick={this.handleToggleEditEventForm}>Edit Event</button>
-                <button onClick={this.handleDeleteEvent}>Delete Event</button>
+                <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`} className="nav-link-back">Back to All events</Link>
+    
+                <Card className='card'>
+                    <CardContent>
+                    <Typography color="textSecondary" gutterBottom>
+                    {this.state.event.date}
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                    {this.state.event.name}
+                    </Typography>
+                    <Typography color="textSecondary">
+                    {this.state.event.address}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        <br />
+                        {this.state.event.description}
+                    </Typography>
+                    </CardContent>
+                    <CardActions>
+                            <Button size="small" onClick={this.handleToggleEditEventForm}>Edit Event</Button>
+                            <Button size="small" onClick={this.handleDeleteEvent}>Delete Event</Button>
+                    </CardActions>
+                </Card>
             </div>
         )
     }
