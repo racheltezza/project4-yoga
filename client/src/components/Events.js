@@ -16,7 +16,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import YogaImage from '/Users/rachel/ga-sei/project4-yoga/client/src/yoga.jpg'
+import YogaImage from '../yoga.jpg'
 
 /* Step 2
  * Rename this class to reflect the component being created
