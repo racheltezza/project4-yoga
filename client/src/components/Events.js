@@ -27,6 +27,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import TextField from '@material-ui/core/TextField';
+import SearchEvents from './SearchEvents';
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -52,8 +53,8 @@ const MyButton = styled(Button)({
     borderRadius: 3,
     boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
     color: 'white',
-    height: 40,
-    padding: '0 30px',
+    height: 30,
+    padding: '0 20px',
     margin: '15px',
   });
 
@@ -164,11 +165,11 @@ const MyButton = styled(Button)({
      <Card className='card'>
       <CardHeader
         title={event.name.text}
-        subheader={event.start.local}
+        subheader={event.start.local} 
       />
       <CardMedia
         className='media'
-        // image={event.logo.url}
+        image={event.logo.url}
         title={event.name.text}
       />
       <CardContent>
@@ -247,16 +248,16 @@ const MyButton = styled(Button)({
             <div>
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/`} className="nav-link-back">Back to all Lists</Link>
                 <h1>One List{this.state.name}</h1>
-                <div>
+                <div className='list-action-button'>
                 <MyButton onClick={this.handleToggleNewEventForm}>Add New Event</MyButton>
-                <DeleteButton onClick={this.handleDeleteEventsList}>Delete this List</DeleteButton>
                 </div>
                 <List className='lists-list'>
                 {eventsList}
                 </List>
+                <DeleteButton onClick={this.handleDeleteEventsList}>Delete this List</DeleteButton>
                 {/* <Button onClick={this.handleToggleNewEventForm} variant="outlined" color="primary">Add New Event</Button> */}
                 <div className='event-search'>
-                    <h6 className='seach-label'>Browse Yoga events by city:</h6>
+                    <h4 className='seach-label'>Browse Yoga events by city:</h4>
                 <form onSubmit={this.getEventbriteEvents}>
                     {/* <label htmlFor='city-search'>Browse events by city:</label> */}
                     {/* <input id='city-search' type='text' placeholder='city...' name='city' /> */}
@@ -271,6 +272,7 @@ const MyButton = styled(Button)({
                     <input type='submit' value="Search" className='search-input'/>
                 </form>
                 </div>
+                {/* <SearchEvents/> */}
                 <div className='search-items'>
                     {searchedEventsList}
                 </div>

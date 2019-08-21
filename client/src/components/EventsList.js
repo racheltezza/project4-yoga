@@ -26,6 +26,7 @@ const MyButton = styled(Button)({
     color: 'white',
     height: 40,
     padding: '0 30px',
+    margin: '15px'
   });
 
 const MyListItem = styled(ListItem) ({
@@ -120,10 +121,10 @@ export default class EventsList extends Component {
                 <Link to={`/users/${this.props.match.params.userId}`} className="nav-link-profile"><AccountIcon/></Link>
                 </div>
                 <h1>My events lists</h1>
+                <MyButton onClick={this.handleToggleNewListForm}>Add New Yoga Event List</MyButton>
                 <List className='lists-list'>
                     {eventsListsList}
                 </List>
-                <MyButton onClick={this.handleToggleNewListForm}>Add New Yoga Event List</MyButton>
                 </div>
         )
     }

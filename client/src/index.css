@@ -37,7 +37,7 @@ h1 {
 }
 
 .page-logo {
-  font-family: 'Shrikhand', cursive;
+  font-family: 'Lobster', cursive;
   font-size: 95px;
   color: black;
   text-shadow: 4px 4px 6px white;
@@ -87,7 +87,7 @@ ul {
 }
 
 .navbar-site-title {
-  font-family: 'Shrikhand', cursive;
+  font-family: 'Lobster', cursive;
   margin: 0 auto;
 }
 .clearfix {
@@ -135,7 +135,7 @@ ul {
   display: flex;
   justify-content: center;
   align-content: center;
-  margin: 0 auto;
+  margin: 30px auto;
   padding: 10px;
 }
 
@@ -156,3 +156,9 @@ ul {
 .seach-label {
   margin: 40px;
 }
+/* 
+.list-action-button {
+  display: flex;
+  justify-content: space-between;
+  
+} */
