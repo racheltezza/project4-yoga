@@ -1,6 +1,4 @@
-/* Step 1 import React, { Component } and axios
- *
- */
+
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -13,10 +11,6 @@ import AccountIcon from '@material-ui/icons/AccountCircle';
 import TextField from '@material-ui/core/TextField';
 import { styled } from '@material-ui/styles';
 
-/* Step 2
- * Rename this class to reflect the component being created
- *
- */
 
 const MyButton = styled(Button)({
     background: 'linear-gradient(45deg, #c684f5 30%, #84e4f5 90%)',
@@ -35,12 +29,6 @@ const MyListItem = styled(ListItem) ({
 
 export default class EventsList extends Component {
 
-    /* Step 3
-    * Create a state for the component to store view data
-    *
-    */
-
-
     state = {
         eventsLists: [],
         newEventsList: {
@@ -48,14 +36,6 @@ export default class EventsList extends Component {
         },
         isNewEventsListFormShowing: false
     }
-
-    /* Step 4
-    * Use componentDidMount to retrieve any data to display
-    *   Here you can make calls to your local express server
-    *   or to an external API
-    *   setState can be run here as well
-    *   -REMINDER remember `setState` it is an async function
-    */
     componentDidMount() {
         this.getAllEventsLists()
     }

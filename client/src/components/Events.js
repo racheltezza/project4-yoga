@@ -10,24 +10,13 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import EventIcon from '@material-ui/icons/Event'
 import { styled } from '@material-ui/styles';
-import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 import TextField from '@material-ui/core/TextField';
-import SearchEvents from './SearchEvents';
+import YogaImage from '/Users/rachel/ga-sei/project4-yoga/client/src/yoga.jpg'
 
 /* Step 2
  * Rename this class to reflect the component being created
@@ -64,10 +53,6 @@ const MyButton = styled(Button)({
 
  export default class Events extends Component {
 
-    /* Step 3
-    * Create a state for the component to store view data
-    *
-    */
     state = {
         events: [],
         newEvent: {
@@ -83,15 +68,6 @@ const MyButton = styled(Button)({
         error: ""
     }
 
-    /* Step 4
-    * Use componentDidMount to retrieve any data to display
-    *   Here you can make calls to your local express server
-    *   or to an external API
-    *   setState can be run here as well
-    *   -REMINDER remember `setState` it is an async function
-    */
-   
-   
     componentDidMount() {
         this.getAllEvents()
     }
@@ -169,13 +145,13 @@ const MyButton = styled(Button)({
       />
       <CardMedia
         className='media'
-        image={event.logo.url}
-        title={event.name.text}
+        image={event.logo===null ? YogaImage : event.logo.url}
+        title={event.name.text.substring(0, 20)}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
         <p>{event.venue.address.address_1}</p>
-        <p>{event.description.text}</p>
+        <p>{event.description.text ? event.description.text.substring(0, 100) + "..." : ''}</p>
         </Typography>
       </CardContent>
     </Card>
