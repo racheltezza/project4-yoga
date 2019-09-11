@@ -95,6 +95,21 @@ const MyButton = styled(Button)({
         })
     }
 
+    handleNewEventbriteEvent = (newEventbriteEvent) => {
+        let newEventTwo = {
+            name: newEventbriteEvent.name.text,
+            city: newEventbriteEvent.venue.address.city,
+            address: newEventbriteEvent.venue.address.address_1,
+            date: newEventbriteEvent.start.local,
+            description: newEventbriteEvent.description.text
+        }
+        axios.post(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`, newEventTwo)
+        .then(() => {
+            this.setState({isNewEventFormShowing: false})
+            this.getAllEvents()
+        })
+    }
+
     handleToggleNewEventForm = () => {
         this.setState((state) => {
           return {isNewEventFormShowing: true}
@@ -102,15 +117,18 @@ const MyButton = styled(Button)({
     }
     
 
-
+    // create Eventbrite external API call
     getEventbriteEvents = async (event) => {
         event.preventDefault()
         const city = event.target.elements.city.value;
         const api_call = await fetch(`https://cors-anywhere.herokuapp.com/https://www.eventbriteapi.com/v3/events/search?location.address=${city}&location.within=10km&expand=venue&categories=107&subcategories=7005`, {method: 'GET', headers: {'Authorization': AUTHORIZATION}});
         const data = await api_call.json()
+        console.log(data)
         if(city) {
             this.setState({
-                eventsSearched: data.events})
+                eventsSearched: data.events
+                });
+
         } else {
             this.setState({error: 'Please enter a city'})
         }
@@ -121,24 +139,25 @@ const MyButton = styled(Button)({
         if(this.state.redirectToEventsList) {
             return <Redirect to={`/users/${this.props.match.params.userId}/eventsLists`} />
         }
-        let searchedEventsList = this.state.eventsSearched.map((event) => {
+        let searchedEventsList = this.state.eventsSearched.map((yogaEvent) => {
             return (
                 <div>
                     <Card className='card'>
                     <CardHeader
-                        title={event.name.text}
-                        subheader={event.start.local} 
+                        title={yogaEvent.name.text}
+                        subheader={yogaEvent.start.local} 
                     />
                     <CardMedia
                         className='media'
-                        image={event.logo===null ? YogaImage : event.logo.url}
-                        title={event.name.text.substring(0, 20)}
+                        image={yogaEvent.logo===null ? YogaImage : yogaEvent.logo.url}
+                        title={yogaEvent.name.text.substring(0, 20)}
                     />
                     <CardContent>
                         <Typography variant="body2" color="textSecondary" component="p">
-                        <p>{event.venue.address.address_1}</p>
-                        <p>{event.description.text ? event.description.text.substring(0, 100) + "..." : ''}</p>
+                        <p>{yogaEvent.venue.address.address_1}</p>
+                        <p>{yogaEvent.description.text ? yogaEvent.description.text.substring(0, 100) + "..." : ''}</p>
                         </Typography>
+                        <button onClick={() => this.handleNewEventbriteEvent(yogaEvent)}>++</button>
                     </CardContent>
                     </Card>
                 </div>
@@ -150,7 +169,7 @@ const MyButton = styled(Button)({
                     <ListItemIcon>
                         <EventIcon />
                     </ListItemIcon>
-                    <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name}</Link>
+                    <Link to={`/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events/${event._id}`}>{event.name ? event.name : 'new event'}</Link>
                 </MyListItem>
             )
         })
