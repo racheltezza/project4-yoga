@@ -59,7 +59,8 @@ const MyButton = styled(Button)({
         isNewEventFormShowing: false,
         redirectToEventsList: false,
         eventsSearched: [],
-        error: ""
+        error: "",
+        expansionActive: false,
     }
 
     componentDidMount() {
@@ -95,21 +96,6 @@ const MyButton = styled(Button)({
         })
     }
 
-    handleNewEventbriteEvent = (newEventbriteEvent) => {
-        let newEventTwo = {
-            name: newEventbriteEvent.name.text,
-            city: newEventbriteEvent.venue.address.city,
-            address: newEventbriteEvent.venue.address.address_1,
-            date: newEventbriteEvent.start.local,
-            description: newEventbriteEvent.description.text
-        }
-        axios.post(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`, newEventTwo)
-        .then(() => {
-            this.setState({isNewEventFormShowing: false})
-            this.getAllEvents()
-        })
-    }
-
     handleToggleNewEventForm = () => {
         this.setState((state) => {
           return {isNewEventFormShowing: true}
@@ -133,6 +119,25 @@ const MyButton = styled(Button)({
             this.setState({error: 'Please enter a city'})
         }
     }
+
+    // expandEventbriteEventDescription = () => {
+    //     this.setState({expansionActive: !expansionActive})
+    // }
+
+    handleNewEventbriteEvent = (newEventbriteEvent) => {
+        let newEventTwo = {
+            name: newEventbriteEvent.name.text,
+            city: newEventbriteEvent.venue.address.city,
+            address: newEventbriteEvent.venue.address.address_1,
+            date: newEventbriteEvent.start.local,
+            description: newEventbriteEvent.description.text
+        }
+        axios.post(`/api/users/${this.props.match.params.userId}/eventsLists/${this.props.match.params.listId}/events`, newEventTwo)
+        .then(() => {
+            this.setState({isNewEventFormShowing: false})
+            this.getAllEvents()
+        })
+    }
     
     render() {
        
@@ -142,7 +147,8 @@ const MyButton = styled(Button)({
         let searchedEventsList = this.state.eventsSearched.map((yogaEvent) => {
             return (
                 <div>
-                    <Card className='card'>
+                    <Card className='eventbrite-card'>
+                        <button onClick={() => this.handleNewEventbriteEvent(yogaEvent)} className='add-eventbrite-button'>+</button>
                     <CardHeader
                         title={yogaEvent.name.text}
                         subheader={yogaEvent.start.local} 
@@ -157,7 +163,6 @@ const MyButton = styled(Button)({
                         <p>{yogaEvent.venue.address.address_1}</p>
                         <p>{yogaEvent.description.text ? yogaEvent.description.text.substring(0, 100) + "..." : ''}</p>
                         </Typography>
-                        <button onClick={() => this.handleNewEventbriteEvent(yogaEvent)}>++</button>
                     </CardContent>
                     </Card>
                 </div>
@@ -216,7 +221,11 @@ const MyButton = styled(Button)({
             </form>
             :
             <div>
+                <div className='clearfix'>
                 <Link to={`/users/${this.props.match.params.userId}/eventsLists/`} className="nav-link-back">Back to all Lists</Link>
+                <DeleteButton onClick={this.handleDeleteEventsList}>Delete this List</DeleteButton>
+
+                </div>
                 <h1>One List{this.state.name}</h1>
                 <div className='list-action-button'>
                     <MyButton onClick={this.handleToggleNewEventForm}>Add New Event</MyButton>
@@ -224,7 +233,7 @@ const MyButton = styled(Button)({
                 <List className='lists-list'>
                     {eventsList}
                 </List>
-                <DeleteButton onClick={this.handleDeleteEventsList}>Delete this List</DeleteButton>
+                <h2>OR</h2>
                 <div className='event-search'>
                     <h4 className='seach-label'>Browse Yoga events by city:</h4>
                     <form onSubmit={this.getEventbriteEvents}>

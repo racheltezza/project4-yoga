@@ -1,6 +1,4 @@
-/* Step 1 import React, { Component } and axios
- *
- */
+
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link, Redirect } from 'react-router-dom'
@@ -11,16 +9,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 
-/* Step 2
- * Rename this class to reflect the component being created
- *
- */
 export default class Event extends Component {
 
-    /* Step 3
-    * Create a state for the component to store view data
-    *
-    */
     state = {
         event: {},
         isEditEventFormDisplayed: false,
@@ -74,46 +64,6 @@ export default class Event extends Component {
             this.state.isEditEventFormDisplayed
             ?
             <form onSubmit={this.handleEditEventSubmit}>
-                {/* <label htmlFor='event-name'>Event Name: </label>
-                <input 
-                type='text' 
-                id='event-name' 
-                name ='name' 
-                onChange={this.handleInputChange} 
-                value={this.state.event.name}
-                />
-                <label htmlFor='event-city'>Event City: </label>
-                <input 
-                type='text' 
-                id='event-city' 
-                name ='city' 
-                onChange={this.handleInputChange} 
-                value={this.state.event.city}
-                />
-                <label htmlFor='event-address'>Event Address: </label>
-                <input 
-                type='text' 
-                id='event-address' 
-                name ='address' 
-                onChange={this.handleInputChange} 
-                value={this.state.event.address}
-                />
-                <label htmlFor='event-date'>Event Date: </label>
-                <input 
-                type='text' 
-                id='event-date' 
-                name ='date' 
-                onChange={this.handleInputChange} 
-                value={this.state.event.date}
-                />
-                <label htmlFor='event-description'>Event Description: </label>
-                <input 
-                type='text' 
-                id='event-description' 
-                name ='description' 
-                onChange={this.handleInputChange} 
-                value={this.state.event.description}
-                /> */}
                 <TextField
                 id="standard-uncontrolled"
                 label="Event Name"

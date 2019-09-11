@@ -93,6 +93,7 @@ ul {
 .clearfix {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .nav-link-back {
   display: flex;
@@ -104,9 +105,16 @@ ul {
   justify-content: flex-end;
   margin: 10px;
 }
-.card {
+
+.eventbrite-card {
   max-width: 30vw;
   max-height: 70vh;
+  display: inline-grid;
+  margin: 10px;
+}
+.card {
+  max-width: 30vw;
+  /* max-height: 70vh; */
   display: inline-grid;
   margin: 10px;
 }
@@ -139,11 +147,11 @@ ul {
   padding: 10px;
 }
 
-/* .new-list-form {
-  display: flex;
-  margin: 0 auto;
-  justify-content: center;
-} */
+.add-eventbrite-button {
+  background-color: black;
+  color: whitesmoke;
+  font-size: 40px;
+}
 
 .new-list-input {
   margin: 50px 10px auto;
