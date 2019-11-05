@@ -9,7 +9,7 @@
     "concurrently": "^4.1.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
-    "mongoose": "^5.6.1",
+    "mongoose": "^5.7.5",
     "react-router-dom": "^5.0.1",
     "typeface-roboto": "0.0.75"
   },
